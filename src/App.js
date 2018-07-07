@@ -8,7 +8,6 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-
   //
   // Lifecycle
   //
@@ -16,7 +15,6 @@ class App extends Component {
     const mqttClient = new Mqtt();
 
     mqttClient.subscribe('presence');
-
     mqttClient.on('message', this.handleMessages);
     mqttClient.publish('presence', 'hello wordl');
   }
@@ -26,7 +24,7 @@ class App extends Component {
   //
   handleMessages = (topic, message) => {
     console.log(topic);
-    console.log(message);
+    console.log(message.toString());
   }
 
   //
