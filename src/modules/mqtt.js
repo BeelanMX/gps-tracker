@@ -3,7 +3,6 @@ import mqtt from 'mqtt';
 export class Mqtt {
   DEFAULT = {
     // Put your mqtt server IP
-    url: '',
     opts: {}
   }
 
