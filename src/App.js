@@ -25,6 +25,8 @@ class App extends Component {
   handleMessages = (topic, message) => {
     console.log(topic);
     console.log(message.toString());
+    // Do something with the message
+    // :)
   }
 
   //
