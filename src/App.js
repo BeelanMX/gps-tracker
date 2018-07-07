@@ -1,43 +1,37 @@
+// External libraries
 import React, { Component } from 'react';
-import mqtt from 'mqtt';
+// Internal libraries
+import {Mqtt} from './modules/mqtt';
+// Components
 import logo from './logo.svg';
+// Css
 import './App.css';
 
-const MQTT_SERVER_URL = '107.170.231.29';
-
-// const mqttOpts = {
-//   keepalive: 60,
-//   reschedulePings: true,
-//   protocolId: 'MQTT',
-//   protocolVersion: 4,
-//   reconnectPeriod: 1000,
-//   connectTimeout: 30 * 1000,
-//   clean: true,
-//   // protocolId: 'MQIsdp',
-//   // protocolVersion: 3,
-//   resubscribe: true,
-//   username: '',
-//   password: '',
-//   queueQoSZero: true
-// }
-
-// const mqttUrl = JSON.parse();
-
 class App extends Component {
-  componentDidMount() {
-    const client = mqtt.connect(`mqtt://${MQTT_SERVER_URL}:9001`);
 
-    client.on('connect', function () {
-      client.subscribe('presence')
-      client.publish('presence', 'Hello mqtt')
-    })
-    
-    client.on('message', function (topic, message) {
-      // message is Buffer
-      console.log(message.toString())
-      client.end()
-    })
+  //
+  // Lifecycle
+  //
+  componentDidMount() {
+    const mqttClient = new Mqtt();
+
+    mqttClient.subscribe('presence');
+
+    mqttClient.on('message', this.handleMessages);
+    mqttClient.publish('presence', 'hello wordl');
   }
+
+  //
+  // Handlers
+  //
+  handleMessages = (topic, message) => {
+    console.log(topic);
+    console.log(message);
+  }
+
+  //
+  // Render
+  //
   render() {
     return (
       <div className="App">
